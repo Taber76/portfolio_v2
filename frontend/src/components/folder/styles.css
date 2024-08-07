@@ -1,0 +1,75 @@
+.folder-container {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  width: 100px;
+  height: 80px;
+}
+
+.folder {
+  position: relative;
+  width: 100px;
+  height: 80px;
+  transform-style: preserve-3d;
+  transform-origin: bottom;
+  transition: transform 0.5s ease;
+}
+
+.folder-container:hover .folder {
+  transform: scale(1.1);
+}
+
+.folder-front, .folder-back {
+  position: absolute;
+  width: 100%;
+  height: 60px;
+  background-color: #f0c040;
+  border: 2px solid #d4a030;
+  border-radius: 4px;
+}
+
+.folder-front {
+  width: 100%;
+  height: 90%;
+  transform: translateY(10%);
+  z-index: 2;
+}
+
+.folder-back {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.folder-container.open .folder{
+  position: fixed;
+  width: 70vw;
+  height: 50%;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.5s ease, height 0.5s ease;
+  z-index: 3
+}
+
+.folder-front.open {
+  transform: translateY(100%);
+  transition: transform 2s ease;
+  z-index: 4
+}
+
+
+
+
+
+.folder-content {
+  opacity: 0;
+  animation: fadeIn 5s 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
