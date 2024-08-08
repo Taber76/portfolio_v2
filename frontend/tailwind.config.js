@@ -3,9 +3,10 @@ export default {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
-      width: {
-
-      },
+      width: {},
+      screens: {
+        'xms': '480px',
+      }
     },
   },
   plugins: [],
