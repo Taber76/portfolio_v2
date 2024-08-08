@@ -13,10 +13,10 @@ export const data = {
       }
     },
     {
-      name: "GoEvent",
+      name: "ServiFix",
       description: "The platform aims to connect clients seeking professional services with providers who offer them. Users can register on the platform to create detailed profiles, whether they are offering services or seeking to contract them. The platform facilitates seamless interactions by allowing users to browse, compare, and engage with service providers effectively.",
       stack: "NextJS, Typescript, Prisma, PostgreSQL",
-      url_folder: "https://res.cloudinary.com/dc3n6pxh9/image/upload/v1723125831/event_zpofll.png",
+      url_folder: "https://res.cloudinary.com/dc3n6pxh9/image/upload/v1723135014/servifix_uvhbsg.webp",
       url_main: "",
       links: {
         deploy: "https://servi-fix-clone.vercel.app/",
