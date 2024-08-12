@@ -1,10 +1,17 @@
 import { useState, useRef, useEffect } from 'react';
-import { Folder } from '../../components/folder';
+import { FaComments } from 'react-icons/fa';
+
+import { Folder, Chat } from '../../components/index';
 import { data } from '../../data/data';
 
 export const Home = () => {
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const [showFolders, setShowFolders] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  const toggleChat = () => {
+    setIsChatOpen(!isChatOpen);
+  };
 
   useEffect(() => {
     const video = videoRef.current;
@@ -25,14 +32,33 @@ export const Home = () => {
   }, []);
 
   return (
-    <div className="">
-      <div className="relative flex flex-col items-center m-10 min-h-[50vw]">
+    <div className="relative h-screen overflow-hidden">
 
-        <div className={`absolute border-4 border-black rounded w-full h-auto object-cover transition-opacity duration-1000 ease-in-out 
-           ${showFolders ? 'opacity-0 xl:opacity-50' : 'xl:opacity-100'}`}>
+      {/* Floating Chat Button */}
+      {!isChatOpen &&
+        <button
+          onClick={toggleChat}
+          className="fixed bottom-4 right-4 bg-blue-500 text-white p-3 rounded-full shadow-lg z-10"
+        >
+          <FaComments size={24} />
+        </button>}
+
+      {/* Floating Chat Window */}
+      <Chat
+        isOpen={isChatOpen}
+        onClose={toggleChat}
+      />
+
+      {/* Video Section */}
+      <div className="relative flex flex-col items-center m-10 min-h-[50vw]">
+        <div
+          className={`absolute border-4 border-black rounded w-auto h-auto object-cover transition-opacity duration-1000 ease-in-out 
+            ${showFolders ? 'opacity-0' : 'xl:opacity-100'}`}
+        >
           <video
             ref={videoRef}
-            className="w-full h-auto object-cover rounded"
+            style={{ maxHeight: '75vh', width: 'auto', objectFit: 'cover' }}
+            className="rounded"
             src="/portfolio.mp4"
             autoPlay
             muted
@@ -40,16 +66,15 @@ export const Home = () => {
           ></video>
         </div>
 
-
+        {/* Content Sections */}
         {showFolders && (
-          <div className="flex-col w-full">
-
+          <div className="flex flex-col max-w-[120vh]">
             {/* Projects */}
-            <div className="flex flex-col justify-center items-start mt-10 ml-10 z-5">
+            <div className="flex flex-col justify-center items-start mt-10 ml-10">
               <div className="text-xl font-bold text-yellow-500">
                 <p>My projects</p>
               </div>
-              <div className="flex flex-wrap gap-5 md:gap-10 justify-start items-start mt-5 z-5">
+              <div className="flex flex-wrap gap-5 md:gap-10 justify-start items-start mt-5">
                 {data.projects.map((project, index) => (
                   <Folder
                     key={index}
@@ -65,11 +90,11 @@ export const Home = () => {
             </div>
 
             {/* About me */}
-            <div className="flex flex-col justify-center items-start mt-10 ml-10 z-5">
+            <div className="flex flex-col justify-center items-start mt-10 ml-10">
               <div className="text-xl font-bold text-yellow-500">
                 <p>About me_</p>
               </div>
-              <div className="flex flex-wrap gap-5 md:gap-10 justify-start items-start mt-5 z-5">
+              <div className="flex flex-wrap gap-5 md:gap-10 justify-start items-start mt-5">
                 {data.about.map((about, index) => (
                   <Folder
                     key={index}
@@ -81,11 +106,8 @@ export const Home = () => {
                     links={about.links}
                   />
                 ))}
-
               </div>
             </div>
-
-
           </div>
         )}
       </div>
