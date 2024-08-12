@@ -67,7 +67,7 @@ export const Chat: React.FC<ChatProps> = ({ isOpen, onClose }) => {
         threadId,
         {
           assistant_id: import.meta.env.VITE_ASSISTANT_ID,
-          max_prompt_tokens: 1000
+          //  max_prompt_tokens: 1000
         }
       );
 
