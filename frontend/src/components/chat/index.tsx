@@ -67,8 +67,7 @@ export const Chat: React.FC<ChatProps> = ({ isOpen, onClose }) => {
         threadId,
         {
           assistant_id: import.meta.env.VITE_ASSISTANT_ID,
-          max_prompt_tokens: 100,
-          max_completion_tokens: 100
+          max_prompt_tokens: 1000
         }
       );
 
@@ -79,9 +78,13 @@ export const Chat: React.FC<ChatProps> = ({ isOpen, onClose }) => {
         const response = messages.data[0].content[0];
         if ('text' in response) {
           dispatch(addMessage({ text: response.text.value, role: 'assistant' }));
+        } else {
+          console.log(response);
+          dispatch(addMessage({ text: 'Something went wrong with the assistant, sorry!', role: 'assistant' }));
         }
       } else {
-        console.log(run.status);
+        console.log(run);
+        dispatch(addMessage({ text: 'Something went wrong with the assistant, sorry!', role: 'assistant' }));
       }
     } catch (error) {
       console.error('Error fetching response from ChatGPT:', error);
